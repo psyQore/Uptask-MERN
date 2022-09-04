@@ -2,6 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "aprendiendo mernstack",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon node index.js",
@@ -10,7 +11,9 @@
   "author": "juan galarce",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
