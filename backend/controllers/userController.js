@@ -36,6 +36,12 @@ const authenticate = async (req, res) => {
     return res.status(404).json({ msg: error.message });
   }
   // Comprobar su password
+  if (await user.checkPassword(password)) {
+    console.log("correcto");
+  } else {
+    const error = new Error("El Password es Incorrecto");
+    return res.status(404).json({ msg: error.message });
+  }
 };
 
 export { register, authenticate };
