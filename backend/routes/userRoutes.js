@@ -3,6 +3,7 @@ import {
   register,
   authenticate,
   confirm,
+  forgetPassword,
 } from "../controllers/userController.js";
 
 const router = express.Router();
@@ -11,6 +12,7 @@ const router = express.Router();
 
 router.post("/", register); // Crear un nuevo usuario
 router.post("/login", authenticate); // Autenticar usuario
-router.get("/confirm/:token", confirm);
+router.get("/confirm/:token", confirm); // Confirmar la cuenta
+router.post("/forget-password", forgetPassword);
 
 export default router;
