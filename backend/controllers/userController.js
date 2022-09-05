@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import generateId from "../helpers/generateId.js";
+import generateJWT from "../helpers/generateJWT.js";
 
 const register = async (req, res) => {
   // Evitar registros duplicados
@@ -37,7 +38,12 @@ const authenticate = async (req, res) => {
   }
   // Comprobar su password
   if (await user.checkPassword(password)) {
-    console.log("correcto");
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateJWT(user._id),
+    });
   } else {
     const error = new Error("El Password es Incorrecto");
     return res.status(404).json({ msg: error.message });
