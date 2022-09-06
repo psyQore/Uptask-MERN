@@ -120,7 +120,9 @@ const newPassword = async (req, res) => {
 };
 
 const profile = async (req, res) => {
-  console.log("Desde Perfil");
+  const { user } = req;
+
+  res.json(user);
 };
 
 export {
