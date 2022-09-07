@@ -1,4 +1,5 @@
 import Project from "../models/Project.js";
+import Task from "../models/Task.js";
 
 const getProjects = async (req, res) => {
   const projects = await Project.find().where("creator").equals(req.user);
@@ -32,7 +33,14 @@ const getProject = async (req, res) => {
     return res.status(401).json({ msg: error.message });
   }
 
-  res.json(project);
+  // Obtener las tareas del proyecto
+
+  const tasks = await Task.find().where("project").equals(project._id);
+
+  res.json({
+    project,
+    tasks,
+  });
 };
 
 const editProject = async (req, res) => {
@@ -90,8 +98,6 @@ const addCollaborator = async (req, res) => {};
 
 const deleteCollaborator = async (req, res) => {};
 
-const getTasks = async (req, res) => {};
-
 export {
   getProjects,
   newProject,
@@ -100,5 +106,4 @@ export {
   deleteProject,
   addCollaborator,
   deleteCollaborator,
-  getTasks,
 };
