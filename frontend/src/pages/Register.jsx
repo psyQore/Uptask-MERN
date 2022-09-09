@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -9,7 +10,7 @@ const Register = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [alert, setAlert] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if ([name, email, password, repeatPassword].includes("")) {
@@ -18,6 +19,37 @@ const Register = () => {
         error: true,
       });
       return;
+    }
+
+    if (password !== repeatPassword) {
+      setAlert({
+        msg: "Los password no son inguales",
+        error: true,
+      });
+      return;
+    }
+
+    if (password.length < 6) {
+      setAlert({
+        msg: "El Password es muy corto, agrega minimo 6 caracteres",
+        error: true,
+      });
+      return;
+    }
+
+    setAlert({});
+
+    // Creando usuario
+    try {
+      const response = await axios.post("http://localhost:4000/api/users", {
+        name,
+        password,
+        email,
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
