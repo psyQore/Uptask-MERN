@@ -1,6 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   return (
     <>
       <h1 className=" text-sky-600 font-black text-6xl capitalize">
@@ -21,6 +27,8 @@ const Register = () => {
             type="text"
             placeholder="Tu Nombre"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -35,6 +43,8 @@ const Register = () => {
             type="email"
             placeholder="Tu Email"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -49,6 +59,8 @@ const Register = () => {
             type="password"
             placeholder="Tu Password"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="my-5">
@@ -63,6 +75,8 @@ const Register = () => {
             type="password"
             placeholder="Repite Tu Password"
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"
+            value={repeatPassword}
+            onChange={(e) => setRepeatPassword(e.target.value)}
           />
         </div>
 
