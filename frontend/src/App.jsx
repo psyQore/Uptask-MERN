@@ -6,6 +6,8 @@ import ForgetPassword from "./pages/ForgetPassword";
 import NewPassword from "./pages/NewPassword";
 import ConfirmAccount from "./pages/ConfirmAccount";
 
+console.log(import.meta.env.VITE_BACKEND_URL)
+
 function App() {
   return (
     <BrowserRouter>
