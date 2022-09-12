@@ -1,19 +1,40 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alert from "../components/Alert";
+import axios from "axios";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email === "" || email.length < 6)
+    if (email === "" || email.length < 6) {
       setAlert({
         msg: "El Email es obligatorio",
         error: true,
       });
+      return;
+    }
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/forget-password`,
+        {
+          email,
+        }
+      );
+      setAlert({
+        msg: data.msg,
+        error: false,
+      });
+    } catch (error) {
+      setAlert({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
   };
 
   const { msg } = alert;
