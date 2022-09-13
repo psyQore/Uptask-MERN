@@ -1,17 +1,30 @@
-import { Outlet, Navigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { Outlet, Navigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
+import useAuth from "../hooks/useAuth";
 
 const RouteProtected = () => {
+  const { auth, loading } = useAuth();
 
-    const { auth, loading } = useAuth();
-
-    if(loading) return "Cargando"
+  if (loading) return "Cargando";
 
   return (
     <>
-    { auth._id ? <Outlet/> : <Navigate to="/" />}
+      {auth._id ? (
+        <div className="bg-gray-100">
+          <Header />
+          <div className="md:flex md:min-h-screen">
+            <Sidebar />
+            <main className="flex-1 p-10 ">
+              <Outlet />
+            </main>
+          </div>
+        </div>
+      ) : (
+        <Navigate to="/" />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default RouteProtected
+export default RouteProtected;
