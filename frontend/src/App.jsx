@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import ForgetPassword from "./pages/ForgetPassword";
 import NewPassword from "./pages/NewPassword";
 import ConfirmAccount from "./pages/ConfirmAccount";
-import { AuthProvider } from "../context/AuthProvider";
+import { AuthProvider } from "./context/AuthProvider";
 
 // console.log(import.meta.env.VITE_BACKEND_URL)
 
