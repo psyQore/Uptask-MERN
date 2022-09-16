@@ -3,19 +3,31 @@ import clientAxios from "../config/clinetAxios";
 
 const ProjectsContext = createContext();
 
-const ProjectsProvider = ({ children}) => {
+const ProjectsProvider = ({ children }) => {
+  const [projects, setProjects] = useState([]);
+  const [alert, setAlert] = useState([]);
 
-    const [projects, setProjects] = useState([]);
+  const showAlert = (alert) => {
+    setAlert(alert);
 
-    return (
-        <ProjectsContext.Provider value={{ projects }}>
-            {children}
-        </ProjectsContext.Provider>
-    )
-}
+    setTimeout(() => {
+      setAlert({});
+    }, 3000);
+  };
 
-export {
-    ProjectsProvider
-}
+  const submitProject = async project => {
+    console.log(project);
+  };
 
-export default ProjectsContext
+  return (
+    <ProjectsContext.Provider
+      value={{ projects, showAlert, alert, submitProject }}
+    >
+      {children}
+    </ProjectsContext.Provider>
+  );
+};
+
+export { ProjectsProvider };
+
+export default ProjectsContext;
