@@ -10,7 +10,13 @@ const Projects = () => {
     <>
       <h1 className="text-4xl font-black">Proyectos</h1>
 
-      <div></div>
+      <div className="bg-white shadow mt-10 rounded-lg p-5" >
+        {projects.length ? (
+          <p className="text-center text-gray-600 uppercase">Si hay Proyectos</p>
+        ) : (
+          <p>No hay Proyectos aún</p>
+        )}
+      </div>
     </>
   );
 };
