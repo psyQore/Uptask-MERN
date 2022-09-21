@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import useProjects from "../hooks/useProjects";
 import Alert from "./Alert";
 
 const FormProject = () => {
+  const [id, setId] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [deliveryDate, setDeliveryDate] = useState("");
   const [client, setClient] = useState("");
 
-  const { showAlert, alert, submitProject } = useProjects();
+  const params = useParams();
+
+  console.log(params);
+  const { showAlert, alert, submitProject, project } = useProjects();
+
+  useEffect(() => {
+    if (params.id) {
+      setId(project._id);
+      setName(project.name);
+      setDescription(project.description);
+      setDeliveryDate(project.deliveryDate?.split("T")[0]);
+      setClient(project.client);
+    } else {
+      console.log("nuevo proyecto");
+    }
+  }, [params]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,7 +125,7 @@ const FormProject = () => {
 
       <input
         type="submit"
-        value="Crear Proyecto"
+        value={id ? "Actualizar Proycto" : "Crear Proyecto"}
         className="bg-sky-600 w-full p-3 uppercase font-bold text-white rounded cursor-pointer hover:bg-sky-700 transition-colors"
       />
     </form>
