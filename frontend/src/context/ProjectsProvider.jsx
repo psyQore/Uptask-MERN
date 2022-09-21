@@ -39,7 +39,7 @@ const ProjectsProvider = ({ children }) => {
 
     setTimeout(() => {
       setAlert({});
-    }, 3000);
+    }, 1000);
   };
 
   const submitProject = async (project) => {
@@ -89,9 +89,7 @@ const ProjectsProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
+      setLoading(false);
     }
   };
 

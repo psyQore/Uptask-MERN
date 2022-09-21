@@ -5,8 +5,6 @@ import PreviewProject from "../components/PreviewProject";
 const Projects = () => {
   const { projects } = useProjects();
 
-  console.log(projects);
-
   return (
     <>
       <h1 className="text-4xl font-black">Proyectos</h1>
