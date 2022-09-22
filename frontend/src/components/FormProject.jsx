@@ -12,7 +12,6 @@ const FormProject = () => {
 
   const params = useParams();
 
-  console.log(params);
   const { showAlert, alert, submitProject, project } = useProjects();
 
   useEffect(() => {
@@ -22,8 +21,6 @@ const FormProject = () => {
       setDescription(project.description);
       setDeliveryDate(project.deliveryDate?.split("T")[0]);
       setClient(project.client);
-    } else {
-      console.log("nuevo proyecto");
     }
   }, [params]);
 
@@ -41,8 +38,9 @@ const FormProject = () => {
 
     // Pasar los datos hacia el provider
 
-    await submitProject({ name, description, deliveryDate, client });
+    await submitProject({id, name, description, deliveryDate, client });
 
+    setId(null);
     setName("");
     setDescription("");
     setDeliveryDate("");
