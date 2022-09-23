@@ -142,7 +142,37 @@ const ProjectsProvider = ({ children }) => {
   };
 
   const deleteProject = async (id) => {
-    console.log("eliminando", id);
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const { data } = await clientAxios.delete(`/projects/${id}`, config);
+
+      // Sincronizar el state
+      const projectsUpdated = projects.filter(
+        (projectState) => projectState._id !== id
+      );
+      setProjects(projectsUpdated);
+
+      setAlert({
+        msg: data.msg,
+        error: true,
+      });
+
+      setTimeout(() => {
+        setAlert({});
+        navigate("/projects");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -155,7 +185,7 @@ const ProjectsProvider = ({ children }) => {
         getProject,
         project,
         loading,
-        deleteProject
+        deleteProject,
       }}
     >
       {children}
